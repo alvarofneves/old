@@ -40,7 +40,7 @@ class UserControllerAPI extends Controller
         $request->validate([
                 'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
                 'email' => 'required|email|unique:users,email',
-                'type' => 'integer|between:18,75',
+                //'type' => 'enum('u','o','a')',
                 'password' => 'min:3'
             ]);
         $user = new User();
@@ -55,7 +55,7 @@ class UserControllerAPI extends Controller
         $request->validate([
                 'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
                 'email' => 'required|email|unique:users,email,'.$id,
-                //'type' => 'integer|between:18,75'
+                //'type' => 'enum('u','o','a')'
             ]);
         $user = User::findOrFail($id);
         $user->update($request->all());
