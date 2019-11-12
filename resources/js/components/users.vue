@@ -97,8 +97,8 @@
         },
         mounted() {
             this.getUsers();
-            axios.get('api/departments')
-                .then(response => { this.departments = response.data.data; });
+            // axios.get('api/departments')
+            //     .then(response => { this.departments = response.data.data; });
         },
         components:{
             'user-list':UserListComponent,

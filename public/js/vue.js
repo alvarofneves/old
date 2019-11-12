@@ -2152,6 +2152,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['users', 'currentUser'],
   data: function data() {
@@ -2282,12 +2283,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this5 = this;
-
-    this.getUsers();
-    axios.get('api/departments').then(function (response) {
-      _this5.departments = response.data.data;
-    });
+    this.getUsers(); // axios.get('api/departments')
+    //     .then(response => { this.departments = response.data.data; });
   },
   components: {
     'user-list': _userList__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -20878,15 +20875,15 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "inputAge" } }, [_vm._v("Age")]),
+      _c("label", { attrs: { for: "inputAge" } }, [_vm._v("Type")]),
       _vm._v(" "),
       _c("input", {
         directives: [
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.user.age,
-            expression: "user.age"
+            value: _vm.user.type,
+            expression: "user.type"
           }
         ],
         staticClass: "form-control",
@@ -20897,61 +20894,16 @@ var render = function() {
           placeholder: "Age",
           value: ""
         },
-        domProps: { value: _vm.user.age },
+        domProps: { value: _vm.user.type },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.user, "age", $event.target.value)
+            _vm.$set(_vm.user, "type", $event.target.value)
           }
         }
       })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "department_id" } }, [_vm._v("Department:")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.user.department_id,
-              expression: "user.department_id"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { id: "department_id", name: "department_id" },
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.$set(
-                _vm.user,
-                "department_id",
-                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-              )
-            }
-          }
-        },
-        _vm._l(_vm.departments, function(department) {
-          return _c(
-            "option",
-            { key: department.id, domProps: { value: department.id } },
-            [_vm._v(" " + _vm._s(department.name) + " ")]
-          )
-        }),
-        0
-      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
@@ -21021,9 +20973,11 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.email))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.age))]),
+            _c("td", [_vm._v(_vm._s(user.type))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.department))]),
+            _c("td", [_vm._v(_vm._s(user.active))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(user.nif))]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -21052,34 +21006,6 @@ var render = function() {
                   }
                 },
                 [_vm._v("Delete")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-sm btn-success",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.definePlayer(user, 1)
-                    }
-                  }
-                },
-                [_vm._v("P1")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-sm btn-success",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.definePlayer(user, 2)
-                    }
-                  }
-                },
-                [_vm._v("P2")]
               )
             ])
           ]
@@ -21100,11 +21026,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Age")]),
+        _c("th", [_vm._v("Type")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Department")]),
+        _c("th", [_vm._v("Active")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Actions")])
+        _c("th", [_vm._v("NIF")])
       ])
     ])
   }
@@ -36660,8 +36586,8 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\ficha5\resources\js\vue.js */"./resources/js/vue.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\ficha5\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\virtualwallet\resources\js\vue.js */"./resources/js/vue.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\virtualwallet\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

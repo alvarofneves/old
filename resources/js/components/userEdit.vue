@@ -14,17 +14,17 @@
                        placeholder="Email address" value="" />
             </div>
             <div class="form-group">
-                <label for="inputAge">Age</label>
-                <input type="number" class="form-control" v-model="user.age"
+                <label for="inputAge">Type</label>
+                <input type="number" class="form-control" v-model="user.type"
                        name="age" id="inputAge"
                        placeholder="Age" value="" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="department_id">Department:</label>
                 <select class="form-control" id="department_id" name="department_id" v-model="user.department_id">
                     <option v-for="department in departments" :key="department.id" v-bind:value="department.id"> {{ department.name }} </option>
                 </select>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <a class="btn btn-primary" v-on:click.prevent="saveUser()">Save</a>

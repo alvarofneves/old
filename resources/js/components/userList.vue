@@ -4,22 +4,23 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Age</th>
-                <th>Department</th>
-                <th>Actions</th>
+                <th>Type</th>
+                <th>Active</th>
+                <!-- <th>Photo</th> -->
+                <th>NIF</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="user in users" :key="user.id" :class="{active: currentUser === user}">
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.age }}</td>
-                <td>{{ user.department }}</td>
+                <td>{{ user.type }}</td>
+                <td>{{ user.active }}</td>
+                <!-- <td>{{ user.photo }}</td> -->
+                <td>{{ user.nif }}</td>
                 <td>
                     <a class="btn btn-sm btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
                     <a class="btn btn-sm btn-danger" v-on:click.prevent="deleteUser(user)">Delete</a>
-                    <a class="btn btn-sm btn-success" v-on:click.prevent="definePlayer(user, 1)">P1</a>
-                    <a class="btn btn-sm btn-success" v-on:click.prevent="definePlayer(user, 2)">P2</a>
                 </td>
             </tr>
         </tbody>
