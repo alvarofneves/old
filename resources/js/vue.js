@@ -13,14 +13,12 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import Users from './components/users';
-import Departments from './components/departments';
-import Game from './components/game';
+import Login from './components/login';
 
 const routes = [
-    {path:'/', redirect:'/users'},
+    {path:'/', redirect:'/login'},
     {path:'/users', component:Users},
-    {path:'/departments', component:Departments},
-    {path:'/tictactoe', component:Game}
+    {path:'/login', component:Login}
 ]
 
 const router = new VueRouter({

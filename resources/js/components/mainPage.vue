@@ -1,31 +1,14 @@
 <template>
     <div>
-        <div class="jumbotron">
+         <div class="jumbotron">
             <h1>{{ title }}</h1>
         </div>
+        <div v-if="!this.$store.state.user">
         <login>
-            
         </login>
-
-        <user-list 
-            :users="users" 
-            :current-user="currentUser"
-            @delete-user="deleteUser" 
-            @edit-user="editUser" 
-            ref="userListReference">
-        </user-list>
-
-        <user-edit 
-            v-if="editingUser"
-            :departments="departments"
-            :user="currentUser"
-            @save-user="saveUser"
-            @cancel-edit="cancelEdit">
-        </user-edit>     
-
-        <div class="alert alert-success" v-if="showSuccess">
-            <button type="button" class="close-btn" v-on:click="showSuccess=false">&times;</button>
-            <strong>{{ successMessage }}</strong>
+        </div>
+        <div v-if="this.$store.state.user">
+            <users></users>
         </div>
 
         
@@ -33,13 +16,13 @@
 </template>
 
 <script>
-    import UserListComponent from './userList';
-    import UserEditComponent from './userEdit';
+    import LoginComponent from './login';
+    import UsersComponent from './users';
 
     export default {
         data: function () {
             return {
-                title: 'List Users',
+                title: 'Virtual Wallet',
                 editingUser: false,
                 showSuccess: false,
                 showFailure: false,
@@ -47,26 +30,14 @@
                 failMessage: '',
                 currentUser: null,
                 users: [],
-                departments: []
             };
         },
-        methods: {
-            editUser: function (user) {
-                this.currentUser = user;
-                this.editingUser = true;
-                this.showSuccess = false;
-
-                
+        methods:{
+            getUsers: function () {
+                axios.get('api/users')
+                    .then(response => { this.users = response.data.data; });
             },
-            deleteUser: function (user) {
-                axios.delete('api/users/' + user.id)
-                    .then(response => {
-                        this.showSuccess = true;
-                        this.successMessage = 'User Deleted';
-                        this.getUsers();
-                    });
-            },
-            saveUser: function (user) {
+            login: function (user) {
                 this.editingUser = false;
                 axios.put('api/users/' + user.id, user)
                     .then(response => {
@@ -80,7 +51,7 @@
                         //this.$refs.UserListReference.currentUser = null;
                     });
             },
-            cancelEdit: function () {
+            cancelLogin: function () {
                 this.showSuccess = false;
                 this.editingUser = false;
                 axios.get('api/users/' + this.currentUser.id)
@@ -92,26 +63,15 @@
                         console.dir(this.currentUser);
                         //this.$refs.UserListReference.currentUser = null;
                     });
-            },
-            getUsers: function () {
-                axios.get('api/users')
-                    .then(response => { this.users = response.data.data; });
-            },
+            }
         },
         mounted() {
+            console.log('Component mounted.');
             this.getUsers();
-            // axios.get('api/departments')
-            //     .then(response => { this.departments = response.data.data; });
         },
         components:{
-            'user-list':UserListComponent,
-            'user-edit':UserEditComponent
+            'login':LoginComponent,
+            'users':UsersComponent
         }
-
     }
 </script>
-
-<style>
-
-</style>
-
