@@ -3,9 +3,6 @@
         <div class="jumbotron">
             <h1>{{ title }}</h1>
         </div>
-        <login>
-            
-        </login>
 
         <user-list 
             :users="users" 

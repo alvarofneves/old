@@ -8,17 +8,21 @@
 
 require('./bootstrap');
 
+import store from './store/auth';
+
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import Users from './components/users';
 import Login from './components/login';
+import MainPage from './components/mainPage';
 
 const routes = [
-    {path:'/', redirect:'/login'},
+    {path:'/', redirect:'/mainPage'},
     {path:'/users', component:Users},
-    {path:'/login', component:Login}
+    {path:'/login', component:Login},
+    {path:'/mainPage', component:MainPage}
 ]
 
 const router = new VueRouter({
@@ -27,6 +31,7 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
+    store,
     router,
     data: {
         

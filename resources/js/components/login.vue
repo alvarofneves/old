@@ -1,45 +1,63 @@
 <template>
-    <div class="jumbotron">
-        
-            <h2>User Login</h2>
-            <div class="form-group">
-                <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" v-model.trim="user.email"
-                       name="email" id="inputEmail"
-                       placeholder="Email address" value="" />
-            </div>
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" v-model="user.password"
-                       name="password" id="inputPassword"
-                       placeholder="Password" value="" />
-            </div>
-
-            <div class="form-group">
-                <a class="btn btn-primary" v-on:click.prevent="userLogin()">Login</a>
-                <a class="btn btn-light" v-on:click.prevent="cancelLogin()">Cancel</a>
-            </div>
-        </div>
-    
-
+  <div class="jumbotron">
+    <form class="login" @submit.prevent="login">
+      <h1>Login</h1>
+      <label>User name</label>
+      <input
+        required
+        type="email"
+        class="form-control"
+        v-model.trim="user.email"
+        placeholder="Email address"
+        value
+      />
+      <label>Password</label>
+      <input
+        required
+        type="password"
+        class="form-control"
+        v-model="user.password"
+        name="password"
+        id="inputPassword"
+        placeholder="Password"
+        value
+      />
+      <hr />
+      <button class="btn btn-primary" v-on:click.prevent="userLogin()">Login</button>
+    </form>
+  </div>
 </template>
 <script>
-    export default {
-        data: function () {
-            return {
-                user: {
-                    email:"",
-                    password:"",
-                },
-            }
-        },
-        methods: {
-            userLogin(){
-                this.$emit('user-login', this.user);
-            },
-            cancelLogin() {
-                this.$emit('cancel-login');
-            }
-        }
+export default {
+  data: function() {
+    return {
+      user: {
+        email: "",
+        password: "",
+        user: this.$store.state.user
+      }
+    };
+  },
+  methods: {
+    userLogin: function(user) {
+      this.editingUser = false;
+      axios
+        .post("api/login", this.user)
+        .then(response => {
+          this.$store.commit("setToken", response.data.access_token);
+          axios.get("/api/user").then(response => {
+            this.$store.commit("setUser", response.data);
+            //this.$emit("change-login-state", response.data);
+          });
+        })
+        .catch(error => {
+          /*  this.$store.commit('clearUserAndToken');
+                        this.typeofmsg = "alert-danger";
+                        this.message = "Invalid credentials";
+                        this.showMessage = true; */
+          console.log("Cannot log in");
+        });
     }
+  }
+};
 </script>
