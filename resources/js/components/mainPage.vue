@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="jumbotron">
-      <h1>{{ title }}</h1>
-    </div>
     <div v-if="!this.$store.state.isLogged">
-      <login>
-
-      </login>
+      <h1>Welcome User</h1>
+      <h2>Total Virtual Wallets {{this.wallets.lenght}}</h2>
+      <login></login>
     </div>
     <div v-if="this.$store.state.isLogged">
+      <h1>Welcome {{this.$store.state.user.name}} </h1>
+      <h2>Total Virtual Wallets {{wallets.lenght}}</h2>
+      <!-- <wallets></wallets> -->
       <users></users>
     </div>
   </div>
@@ -17,19 +17,22 @@
 <script>
 import LoginComponent from "./login";
 import UsersComponent from "./users";
+import WalletsComponent from "./wallets";
 
 export default {
   props: ["user"],
   data: function() {
     return {
-      title: "Virtual Wallet",
       editingUser: false,
+      showWelcome: false,
       showSuccess: false,
       showFailure: false,
       successMessage: "",
       failMessage: "",
       currentUser: null,
       users: [],
+      wallets:[],
+      walletsCount: null
       //isLogged: false
     };
   },
@@ -38,11 +41,18 @@ export default {
       axios.get("api/users").then(response => {
         this.users = response.data.data;
       });
-    },
-    changeLoginState: function(user){
-        this.$store.commit("setUser", user);
-        //this.isLogged = true;
 
+    },
+    getWallets: function() {
+      axios.get("api/wallets").then(response => {
+        this.wallets = response.data.data;
+      });
+      /* walletsCount=this.wallets.lenght; */
+
+    },
+    changeLoginState: function(user) {
+      this.$store.commit("setUser", user);
+      //this.isLogged = true;
     }
 
     /*cancelLogin: function () {
@@ -62,6 +72,8 @@ export default {
   mounted() {
     console.log("Component mounted.");
     this.getUsers();
+    this.getWallets();
+    console.log(this.wallets)
   },
   computed: {
     isLogged: function() {
@@ -71,7 +83,8 @@ export default {
   },
   components: {
     login: LoginComponent,
-    users: UsersComponent
+    users: UsersComponent,
+    wallets: WalletsComponent
   }
 };
 </script>

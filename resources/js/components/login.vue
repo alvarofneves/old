@@ -1,7 +1,7 @@
 <template>
   <div class="jumbotron">
     <form class="login" @submit.prevent="login">
-      <h1>Login</h1>
+      <h1>{{title}}</h1>
       <label>User name</label>
       <input
         required
@@ -31,6 +31,7 @@
 export default {
   data: function() {
     return {
+      title:"Login",
       user: {
         email: "",
         password: "",

@@ -17,10 +17,12 @@ Vue.use(VueRouter);
 import Users from './components/users';
 import Login from './components/login';
 import MainPage from './components/mainPage';
+import Wallets from './components/wallets';
 
 const routes = [
     {path:'/', redirect:'/mainPage'},
     {path:'/users', component:Users},
+    {path:'/wallets', component:Wallets},
     {path:'/login', component:Login},
     {path:'/mainPage', component:MainPage}
 ]
