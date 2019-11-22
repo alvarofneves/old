@@ -18,6 +18,7 @@
 import LoginComponent from "./login";
 import UsersComponent from "./users";
 import WalletsComponent from "./wallets";
+import MovementsComponent from "./movements";
 
 export default {
   props: ["user"],
