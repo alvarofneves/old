@@ -24,6 +24,7 @@
       />
       <hr />
       <button class="btn btn-primary" v-on:click.prevent="userLogin()">Login</button>
+      <button class="btn btn-primary" v-on:click.prevent="registerUser()">Register</button>
     </form>
   </div>
 </template>
@@ -57,6 +58,9 @@ export default {
                         this.showMessage = true; */
           console.log("Cannot log in");
         });
+    },
+    registerUser: function(){
+      this.$emit("begin-register-user");
     }
   }
 };

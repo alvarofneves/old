@@ -4,9 +4,19 @@
       <h1>{{ title }}</h1>
     </div>
     <div v-if="!this.$store.state.isLogged">
-      <login>
 
-      </login>
+      <div v-if="!registerUserState">
+      <login 
+        @begin-register-user="beginRegisterUser"
+      />
+      </div>
+
+      <div v-if="registerUserState">
+        <register
+          @cancel-register-user="cancelRegisterUser"
+        />
+      </div>
+
     </div>
     <div v-if="this.$store.state.isLogged">
       <users></users>
@@ -17,6 +27,7 @@
 <script>
 import LoginComponent from "./login";
 import UsersComponent from "./users";
+import RegisterComponent from "./register";
 
 export default {
   props: ["user"],
@@ -30,7 +41,7 @@ export default {
       failMessage: "",
       currentUser: null,
       users: [],
-      //isLogged: false
+      registerUserState: false
     };
   },
   methods: {
@@ -38,6 +49,12 @@ export default {
       axios.get("api/users").then(response => {
         this.users = response.data.data;
       });
+    },
+    beginRegisterUser: function(){
+      this.registerUserState = true;
+    },
+    cancelRegisterUser: function(){
+      this.registerUserState = false;
     },
     changeLoginState: function(user){
         this.$store.commit("setUser", user);
@@ -71,7 +88,8 @@ export default {
   },
   components: {
     login: LoginComponent,
-    users: UsersComponent
+    users: UsersComponent,
+    register: RegisterComponent
   }
 };
 </script>

@@ -16,12 +16,14 @@ Vue.use(VueRouter);
 
 import Users from './components/users';
 import Login from './components/login';
+import Register from './components/register';
 import MainPage from './components/mainPage';
 
 const routes = [
     {path:'/', redirect:'/mainPage'},
     {path:'/users', component:Users},
     {path:'/login', component:Login},
+    {path:'/register', component:Register},
     {path:'/mainPage', component:MainPage}
 ]
 
