@@ -36,7 +36,7 @@
     export default {
         data: function () {
             return {
-                title: 'List Users',
+                title: 'Virtual Wallet',
                 editingUser: false,
                 showSuccess: false,
                 showFailure: false,

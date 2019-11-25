@@ -18,13 +18,18 @@ import Users from './components/users';
 import Login from './components/login';
 import Register from './components/register';
 import MainPage from './components/mainPage';
+import Wallets from './components/wallets';
+import Movements from './components/movements';
 
 const routes = [
     {path:'/', redirect:'/mainPage'},
     {path:'/users', component:Users},
+    {path:'/wallets', component:Wallets},
     {path:'/login', component:Login},
     {path:'/register', component:Register},
     {path:'/mainPage', component:MainPage}
+    {path:'/mainPage', component:MainPage},
+    {path:'/movements', component:Movements}
 ]
 
 const router = new VueRouter({
