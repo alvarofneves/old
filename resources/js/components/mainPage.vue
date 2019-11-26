@@ -1,17 +1,12 @@
 <template>
   <div>
     <div v-if="!this.$store.state.isLogged">
-
       <div v-if="!registerUserState">
-      <login 
-        @begin-register-user="beginRegisterUser"
-      />
+        <login @begin-register-user="beginRegisterUser" />
       </div>
 
       <div v-if="registerUserState">
-        <register
-          @cancel-register-user="cancelRegisterUser"
-        />
+        <register @cancel-register-user="cancelRegisterUser" />
       </div>
 
       <h1>Welcome User</h1>
@@ -19,7 +14,7 @@
       <login></login>
     </div>
     <div v-if="this.$store.state.isLogged">
-      <h1>Welcome {{this.$store.state.user.name}} </h1>
+      <h1>Welcome {{this.$store.state.user.name}}</h1>
       <h2>Total Virtual Wallets {{wallets.lenght}}</h2>
       <!-- <wallets></wallets> -->
       <users></users>
@@ -46,7 +41,7 @@ export default {
       failMessage: "",
       currentUser: null,
       users: [],
-      registerUserState: false
+      registerUserState: false,
       wallets:[],
       walletsCount: null
       //isLogged: false
@@ -68,6 +63,7 @@ export default {
     changeLoginState: function(user){
         this.$store.commit("setUser", user);
         //this.isLogged = true;
+    },
     getWallets: function() {
       axios.get("api/wallets").then(response => {
         this.wallets = response.data.data;
@@ -109,9 +105,9 @@ export default {
   components: {
     login: LoginComponent,
     users: UsersComponent,
-    register: RegisterComponent
+    register: RegisterComponent,
     users: UsersComponent,
     wallets: WalletsComponent
   }
-};
+}
 </script>
