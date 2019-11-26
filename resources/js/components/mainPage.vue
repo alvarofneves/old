@@ -1,16 +1,16 @@
 <template>
   <div>
     <div v-if="!this.$store.state.isLogged">
-      <div v-if="!registerUserState">
+      <!-- <div v-if="!registerUserState">
         <login @begin-register-user="beginRegisterUser" />
       </div>
 
       <div v-if="registerUserState">
         <register @cancel-register-user="cancelRegisterUser" />
       </div>
-
+ -->
       <h1>Welcome User</h1>
-      <h2>Total Virtual Wallets {{this.wallets.lenght}}</h2>
+      <h2>Total Virtual Wallets {{this.wallets.length}}</h2>
       <login></login>
     </div>
     <div v-if="this.$store.state.isLogged">

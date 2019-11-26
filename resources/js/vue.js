@@ -28,7 +28,6 @@ const routes = [
     {path:'/login', component:Login},
     {path:'/register', component:Register},
     {path:'/mainPage', component:MainPage},
-    /* {path:'/mainPage', component:MainPage}, */
     {path:'/movements', component:Movements}
 ]
 

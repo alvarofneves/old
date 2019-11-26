@@ -2210,6 +2210,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -20327,34 +20334,10 @@ var render = function() {
       ? _c(
           "div",
           [
-            !_vm.registerUserState
-              ? _c(
-                  "div",
-                  [
-                    _c("login", {
-                      on: { "begin-register-user": _vm.beginRegisterUser }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.registerUserState
-              ? _c(
-                  "div",
-                  [
-                    _c("register", {
-                      on: { "cancel-register-user": _vm.cancelRegisterUser }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
             _c("h1", [_vm._v("Welcome User")]),
             _vm._v(" "),
             _c("h2", [
-              _vm._v("Total Virtual Wallets " + _vm._s(this.wallets.lenght))
+              _vm._v("Total Virtual Wallets " + _vm._s(this.wallets.length))
             ]),
             _vm._v(" "),
             _c("login")
@@ -20692,7 +20675,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Create")]
+          [_vm._v("\n            Create\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -20706,7 +20689,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Cancel")]
+          [_vm._v("\n            Cancel\n        ")]
         )
       ]
     )
@@ -37990,35 +37973,35 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     clearUserAndToken: function clearUserAndToken(state) {
       state.user = null;
       state.token = "";
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
       axios.defaults.headers.common.Authorization = undefined;
     },
     clearUser: function clearUser(state) {
       state.user = null;
-      sessionStorage.removeItem('user');
+      localStorage.removeItem('user');
     },
     clearToken: function clearToken(state) {
       state.token = "";
-      sessionStorage.removeItem('token');
+      localStorage.removeItem('token');
       axios.defaults.headers.common.Authorization = undefined;
       state.isLogged = false;
     },
     setUser: function setUser(state, user) {
       state.user = user;
-      sessionStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
       state.isLogged = true;
     },
     setToken: function setToken(state, token) {
       state.token = token;
-      sessionStorage.setItem('token', token);
+      localStorage.setItem('token', token);
       axios.defaults.headers.common.Authorization = "Bearer " + token;
     },
     loadTokenAndUserFromSession: function loadTokenAndUserFromSession(state) {
       state.token = "";
       state.user = null;
-      var token = sessionStorage.getItem('token');
-      var user = sessionStorage.getItem('user');
+      var token = localStorage.getItem('token');
+      var user = localStorage.getItem('user');
 
       if (token) {
         state.token = token;
@@ -38031,15 +38014,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
     /*         setMeal: (state, meal) => {
                 state.meals.push(meal);
-                sessionStorage.setItem('meals', JSON.stringify(state.meals));
+                localStorage.setItem('meals', JSON.stringify(state.meals));
             },
             removeMeal: (state, meal) => {
                 state.meals.splice(state.meals.indexOf(meal), 1);
-                sessionStorage.setItem('meals', JSON.stringify(state.meals));
+                localStorage.setItem('meals', JSON.stringify(state.meals));
             },
             clearAllMeals: (state) => {
                 state.meals = [];
-                sessionStorage.removeItem('meals');
+                localStorage.removeItem('meals');
             }, */
 
   }
@@ -38101,9 +38084,7 @@ var routes = [{
 }, {
   path: '/mainPage',
   component: _components_mainPage__WEBPACK_IMPORTED_MODULE_5__["default"]
-},
-/* {path:'/mainPage', component:MainPage}, */
-{
+}, {
   path: '/movements',
   component: _components_movements__WEBPACK_IMPORTED_MODULE_7__["default"]
 }];
