@@ -20337,7 +20337,7 @@ var render = function() {
             _c("h1", [_vm._v("Welcome User")]),
             _vm._v(" "),
             _c("h2", [
-              _vm._v("Total Virtual Wallets " + _vm._s(this.wallets.length))
+              _vm._v("Total Virtual Wallets " + _vm._s(_vm.wallets.length))
             ]),
             _vm._v(" "),
             _c("login")
@@ -20355,7 +20355,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("h2", [
-              _vm._v("Total Virtual Wallets " + _vm._s(_vm.wallets.lenght))
+              _vm._v("Total Virtual Wallets " + _vm._s(_vm.wallets.length))
             ]),
             _vm._v(" "),
             _c("users")

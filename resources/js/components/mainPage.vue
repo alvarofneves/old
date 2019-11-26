@@ -10,12 +10,12 @@
       </div>
  -->
       <h1>Welcome User</h1>
-      <h2>Total Virtual Wallets {{this.wallets.length}}</h2>
+      <h2>Total Virtual Wallets {{wallets.length}}</h2>
       <login></login>
     </div>
     <div v-if="this.$store.state.isLogged">
       <h1>Welcome {{this.$store.state.user.name}}</h1>
-      <h2>Total Virtual Wallets {{wallets.lenght}}</h2>
+      <h2>Total Virtual Wallets {{wallets.length}}</h2>
       <!-- <wallets></wallets> -->
       <users></users>
     </div>
