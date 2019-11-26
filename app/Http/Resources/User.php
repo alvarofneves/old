@@ -19,6 +19,7 @@ class User extends Resource
             'name' => $this->name,
             'email' => $this->email,
             'type' => $this->type,
+            'nif' => $this->nif
             /* 'wallet_id' => $this->wallet_id,
             'value' => $this->wallet->value, */
         ];

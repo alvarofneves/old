@@ -39,9 +39,10 @@ class UserControllerAPI extends Controller
     {
         $request->validate([
                 'name' => 'required|min:3|regex:/^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ ]+$/',
-                'email' => 'required|email|unique:users,email',
-                //'type' => 'enum('u','o','a')',
-                'password' => 'min:3'
+                'email' =>'required|email|unique:users,email',
+                /* 'type' => 'alpha_num('u','o','a')', */
+                'password' => 'min:3'/* ,
+                'nif' => 'min:9' */
             ]);
         $user = new User();
         $user->fill($request->all());

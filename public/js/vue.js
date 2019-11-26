@@ -1921,10 +1921,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./register */ "./resources/js/components/register.vue");
 /* harmony import */ var _wallets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wallets */ "./resources/js/components/wallets.vue");
 /* harmony import */ var _movements__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./movements */ "./resources/js/components/movements.vue");
-var _components;
+var _methods, _components;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -1972,7 +1975,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     };
   },
-  methods: _defineProperty({
+  methods: (_methods = {
     getUsers: function getUsers() {
       var _this = this;
 
@@ -1997,9 +2000,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
       /* walletsCount=this.wallets.lenght; */
     }
-  }, "changeLoginState", function changeLoginState(user) {
+  }, _defineProperty(_methods, "changeLoginState", function changeLoginState(user) {
     this.$store.commit("setUser", user); //this.isLogged = true;
-  }),
+  }), _defineProperty(_methods, "userLogout", function userLogout(user) {
+    var _this3 = this;
+
+    axios.post("api/logout", this.user).then(function (response) {
+      _this3.$store.dispach("clearToken").then(function (response) {
+        _this3.$router.push({
+          name: "mainPage"
+        });
+      });
+    })["catch"](function (error) {
+      console.log("Cannot logout");
+    });
+  }), _methods),
   mounted: function mounted() {
     console.log("Component mounted.");
     this.getUsers();
@@ -20358,6 +20373,20 @@ var render = function() {
               _vm._v("Total Virtual Wallets " + _vm._s(_vm.wallets.length))
             ]),
             _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.userLogout()
+                  }
+                }
+              },
+              [_vm._v("\n               Logout\n           ")]
+            ),
+            _vm._v(" "),
             _c("users")
           ],
           1
@@ -37965,7 +37994,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    token: "",
+    token: localStorage.getItem('token') || null,
     user: null,
     isLogged: false
   },
