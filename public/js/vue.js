@@ -1868,6 +1868,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1893,9 +1897,9 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (error) {
         /*  this.$store.commit('clearUserAndToken');
-                      this.typeofmsg = "alert-danger";
-                      this.message = "Invalid credentials";
-                      this.showMessage = true; */
+            this.typeofmsg = "alert-danger";
+            this.message = "Invalid credentials";
+            this.showMessage = true; */
         console.log("Cannot log in");
       });
     },
@@ -20302,7 +20306,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Login")]
+          [_vm._v("\n            Login\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -20316,7 +20320,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Register")]
+          [_vm._v("\n            Register\n        ")]
         )
       ]
     )
@@ -20366,7 +20370,7 @@ var render = function() {
           "div",
           [
             _c("h1", [
-              _vm._v("Welcome " + _vm._s(this.$store.state.user.name))
+              _vm._v("Welcome, " + _vm._s(this.$store.state.user.name))
             ]),
             _vm._v(" "),
             _c("h2", [
@@ -38149,8 +38153,8 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\virtualwallet\resources\js\vue.js */"./resources/js/vue.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\virtualwallet\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/eliomartins/Desktop/EI/DAD/Project/virtualwallet/resources/js/vue.js */"./resources/js/vue.js");
+module.exports = __webpack_require__(/*! /Users/eliomartins/Desktop/EI/DAD/Project/virtualwallet/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

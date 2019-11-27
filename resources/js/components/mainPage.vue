@@ -4,23 +4,9 @@
             <!-- <div v-if="!registerUserState">
         <login @begin-register-user="beginRegisterUser" />
       </div>
-
       <div v-if="registerUserState">
         <register @cancel-register-user="cancelRegisterUser" />
       </div>
- -->
-            <h1>Welcome User</h1>
-            <h2>Total Virtual Wallets {{ wallets.length }}</h2>
-            <login></login>
-        </div>
-        <div v-if="this.$store.state.isLogged">
-            <h1>Welcome {{ this.$store.state.user.name }}</h1>
-            <h2>Total Virtual Wallets {{ wallets.length }}</h2>
-            <button class="btn btn-primary" v-on:click.prevent="userLogout()">
-                Logout
-            </button>
-            <!-- <wallets></wallets> -->
-            <users></users>
         </div>
     </div>
 </template>
