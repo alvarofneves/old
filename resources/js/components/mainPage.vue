@@ -1,12 +1,29 @@
 <template>
     <div>
-        <div v-if="!this.$store.state.isLogged">
+        <div v-if="!this.$store.state.isLogged" align="center">
             <!-- <div v-if="!registerUserState">
         <login @begin-register-user="beginRegisterUser" />
       </div>
       <div v-if="registerUserState">
         <register @cancel-register-user="cancelRegisterUser" />
       </div>
+  -->
+
+            <h1>Welcome To VirtualWallets</h1>
+            <br><br>
+            <div>
+                <h2>Total Wallets</h2>
+                <h1>{{ this.wallets.length }}</h1>
+            </div>
+            <br><br>
+            <login></login>
+        </div>
+
+        <div v-if="this.$store.state.isLogged">
+            <h1>Welcome, {{ this.$store.state.user.name }}</h1>
+            <h2>Total Virtual Wallets {{ wallets.lenght }}</h2>
+            <!-- <wallets></wallets> -->
+            <users></users>
         </div>
     </div>
 </template>
@@ -61,19 +78,21 @@ export default {
         changeLoginState: function(user) {
             this.$store.commit("setUser", user);
             //this.isLogged = true;
-        },
-        userLogout: function(user) {
-            axios
-                .post("api/logout", this.user)
-                .then(response => {
-                    this.$store.dispach("clearToken").then(response => {
-                        this.$router.push({ name: "mainPage" });
-                    });
-                })
-                .catch(error => {
-                    console.log("Cannot logout");
-                });
         }
+
+        /*cancelLogin: function () {
+                this.showSuccess = false;
+                this.editingUser = false;
+                axios.get('api/users/' + this.currentUser.id)
+                    .then(response => {
+                        console.dir(this.currentUser);
+                        // Copies response.data.data properties to this.currentUser
+                        // without changing this.currentUser reference
+                        Object.assign(this.currentUser, response.data.data);
+                        console.dir(this.currentUser);
+                        //this.$refs.UserListReference.currentUser = null;
+                    });
+            }*/
     },
     mounted() {
         console.log("Component mounted.");

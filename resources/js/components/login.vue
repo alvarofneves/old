@@ -1,5 +1,7 @@
 <template>
-    <div class="jumbotron">
+    <div class="jumbotron" 
+    align="left" 
+    padding-top= "20%">
         <form class="login" @submit.prevent="login">
             <h1>{{ title }}</h1>
             <label>User name</label>
@@ -26,7 +28,7 @@
             <button class="btn btn-primary" v-on:click.prevent="userLogin()">
                 Login
             </button>
-            <button class="btn btn-primary" v-on:click.prevent="registerUser()">
+            <button class="btn btn-secondary" v-on:click.prevent="registerUser()">
                 Register
             </button>
         </form>
@@ -70,3 +72,17 @@ export default {
     }
 };
 </script>
+<style scoped>
+.jumbotron{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    align-content: left;
+    width: 50%;
+}
+.form-control{
+    width: 100%;
+}
+
+</style>
