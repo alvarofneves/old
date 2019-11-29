@@ -134,7 +134,18 @@ export default {
         cancelRegister: function() {
             this.$emit("cancel-register-user");
         },
-        createUser: function(user) {}
+        createUser: function(user) {
+            axios.post("api/users", {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                nif: this. nif
+            })
+            .then(response =>{
+                console.log(response)
+                this.$store.commit("setUser", response.data);
+            })
+        }   
     }
 };
 </script>
