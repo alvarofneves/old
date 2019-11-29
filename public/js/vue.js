@@ -2329,7 +2329,20 @@ __webpack_require__.r(__webpack_exports__);
     cancelRegister: function cancelRegister() {
       this.$emit("cancel-register-user");
     },
-    createUser: function createUser(user) {}
+    createUser: function createUser(user) {
+      var _this = this;
+
+      axios.post("api/users", {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        nif: this.nif
+      }).then(function (response) {
+        console.log(response);
+
+        _this.$store.commit("setUser", response.data);
+      });
+    }
   }
 });
 
