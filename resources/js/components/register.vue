@@ -1,56 +1,89 @@
 <template>
-    <div class="jumbotron">
+    <div class="jumbotron" align="left">
         <form class="register" @submit.prevent="register">
-            <h1>Register</h1>
+            <h1>{{ title }}</h1>
+            <pre>
+                {{ $v.password }}
+            </pre>
             <label>User name</label>
             <input
                 required
-                type="email"
+                type="text"
+                @change="$v.name.$touch()"
                 class="form-control"
-                v-model.trim="user.email"
-                placeholder="Email address"
+                v-model.trim="name"
+                placeholder="Full name"
                 value
             />
+            <p v-if="!$v.name.required">Name required</p>
+            <label>Email</label>
+            <input
+                required
+                type="email"
+                @change="$v.email.$touch()"
+                class="form-control"
+                v-model.trim="email"
+                placeholder="Email"
+                value
+            />
+            <p v-if="!$v.email.required">Email required</p>
+            <p v-if="!$v.email.email">Invalid Email</p>
             <label>Password</label>
             <input
                 required
                 type="password"
+                @change="$v.password.$touch()"
                 class="form-control"
-                v-model="user.password"
+                v-model="password"
                 name="password"
-                id="inputPassword"
+                id="password"
                 placeholder="Password"
                 value
             />
-            <label>More Information</label>
-            <label>Name</label>
+            <p v-if="!$v.password.required">Password required</p>
+            <p v-if="!$v.password.minlength">Must have more than 3 characters</p>
+            <label>Confirm Password</label>
             <input
                 required
                 type="password"
+                @change="$v.confirmation_password.$touch()"
                 class="form-control"
-                v-model="user.password"
-                name="password"
-                id="inputPassword"
+                v-model="confirmation_password"
+                name="confirmation_password"
+                id="confirmation_password"
                 placeholder="Password"
                 value
             />
-            <label>ETC</label>
+            <p v-if="!$v.confirmation_password.required">Password confirmation required</p>
+            <p v-if="!$v.confirmation_password.sameAs">Password mismatch</p>
+            <label>NIF</label>
             <input
                 required
-                type="password"
+                type="text"
+                @change="$v.nif.$touch()"
                 class="form-control"
-                v-model="user.password"
-                name="password"
-                id="inputPassword"
-                placeholder="Password"
+                v-model="nif"
+                name="nif"
+                id="nif"
+                placeholder="NIF"
                 value
+            />
+            <p v-if="!$v.nif.required">You must insert a NIF</p>
+            <p v-if="!$v.nif.numeric">Can only have numeric characters</p>
+            <label>Photo</label>
+            <br />
+            <input
+                type="file"
+                accept="image/*"
+                @change="uploadImage($event)"
+                id="file-input"
             />
             <hr />
             <button class="btn btn-primary" v-on:click.prevent="createUser()">
                 Create
             </button>
             <button
-                class="btn btn-primary"
+                class="btn btn-secondary"
                 v-on:click.prevent="cancelRegister()"
             >
                 Cancel
@@ -59,15 +92,43 @@
     </div>
 </template>
 <script>
+import {
+    required,
+    email,
+    sameAs,
+    minLength,
+    numeric,
+} from "vuelidate/lib/validators";
+
 export default {
     data: function() {
         return {
-            user: {
-                email: "",
-                password: "",
-                user: this.$store.state.user
-            }
+            title: "Register",
+            name: "",
+            email: "",
+            password: "",
+            confirmation_password: "",
+            nif:""
         };
+    },
+    validations: {
+        name: { required },
+        email: {
+            required,
+            email,
+        },
+        password: {
+            required,
+            minlength: minLength(3)
+        },
+        confirmation_password: {
+            required,
+            sameAs: sameAs("password")
+        },
+        nif:{
+            required,
+            numeric
+        }
     },
     methods: {
         cancelRegister: function() {
@@ -77,3 +138,19 @@ export default {
     }
 };
 </script>
+<style scoped>
+.jumbotron {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 50%;
+}
+.form-control {
+    width: 100%;
+    align-content: left;
+}
+p {
+    color: red;
+}
+</style>

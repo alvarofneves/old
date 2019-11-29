@@ -1,70 +1,94 @@
 <template>
-    <div class="jumbotron" 
-    align="left" 
-    padding-top= "20%">
+    <div class="jumbotron" align="left">
+        <pre>
+            {{ $v }}
+        </pre>
         <form class="login" @submit.prevent="login">
-            <h1>{{ title }}</h1>
-            <label>User name</label>
-            <input
-                required
-                type="email"
-                class="form-control"
-                v-model.trim="user.email"
-                placeholder="Email address"
-                value
-            />
-            <label>Password</label>
-            <input
-                required
-                type="password"
-                class="form-control"
-                v-model="user.password"
-                name="password"
-                id="inputPassword"
-                placeholder="Password"
-                value
-            />
+            <h1 align="center">{{ title }}</h1>
+            
+            <div class="inputField">
+                <label for="email">Email:</label>
+                <input
+                    type="email"
+                    @change="$v.email.$touch()"
+                    class="form-control"
+                    v-model.trim="email"
+                    placeholder="Email address"
+                    id="email"
+                    required
+                    value
+                />
+                <p v-if="$v.email.$error">You must insert an Email</p>
+            </div>  
+            <br>
+            <div class="inputField">
+                <label for="password">Password:</label>
+                <input
+                    type="password"
+                    @change="$v.password.$touch()"
+                    class="form-control"
+                    v-model="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    required
+                    value
+                />
+                <p v-if="$v.password.$error">Field Required</p>
+            </div>
             <hr />
             <button class="btn btn-primary" v-on:click.prevent="userLogin()">
                 Login
             </button>
-            <button class="btn btn-secondary" v-on:click.prevent="registerUser()">
+            <button
+                class="btn btn-secondary"
+                v-on:click.prevent="registerUser()"
+            >
                 Register
             </button>
         </form>
     </div>
 </template>
 <script>
+import { required, email } from 'vuelidate/lib/validators';
+
 export default {
     data: function() {
         return {
             title: "Login",
-            user: {
-                email: "",
-                password: "",
-                user: this.$store.state.user
-            }
+            email: "",
+            password: "",
         };
+    },
+    validations:{
+        email: { required, email },
+        password: { required }
     },
     methods: {
         userLogin: function(user) {
-            this.editingUser = false;
-            axios
-                .post("api/login", this.user)
-                .then(response => {
-                    this.$store.commit("setToken", response.data.access_token);
-                    axios.get("/api/user").then(response => {
-                        this.$store.commit("setUser", response.data);
-                        //this.$emit("change-login-state", response.data);
-                    });
-                })
-                .catch(error => {
-                    /*  this.$store.commit('clearUserAndToken');
-                        this.typeofmsg = "alert-danger";
-                        this.message = "Invalid credentials";
-                        this.showMessage = true; */
-                    console.log("Cannot log in");
-                });
+            if(!this.$v.$invalid){
+                this.editingUser = false;
+                axios.post("api/login", {
+                        email: this.email,
+                        password: this.password
+                    })
+                    .then(response =>{
+                        console.log(response);
+                        this.$store.commit("setToken", response.data.access_token);
+                        axios.get("api/user")
+                        .then(response =>{
+                            this.$store.commit("setUser", response.data);
+                        })
+                        .catch(error =>{
+                            console.log("Cannot get user");
+                        })
+                    })
+                    .catch(error =>{
+                        console.log("Cannot log in");
+                    })
+            }else{
+                console.log("Invalid Credentials");
+            }
         },
         registerUser: function() {
             this.$emit("begin-register-user");
@@ -73,16 +97,18 @@ export default {
 };
 </script>
 <style scoped>
-.jumbotron{
+.jumbotron {
     padding-top: 2%;
     padding-bottom: 2%;
     padding-left: 5%;
     padding-right: 5%;
-    align-content: left;
     width: 50%;
 }
-.form-control{
+.form-control {
     width: 100%;
+    align-content: left;
 }
-
+p{
+    color: red;
+}
 </style>
