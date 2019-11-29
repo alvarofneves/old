@@ -1888,7 +1888,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1984,11 +1983,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -2000,8 +1994,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       editingUser: false,
       showWelcome: false,
-      showSuccess: false,
-      showFailure: false,
       successMessage: "",
       failMessage: "",
       currentUser: null,
@@ -2292,16 +2284,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//TODO: FAZER O BLOQUEIO DO BOTAO CREATE USER SE HOUVER PELO MENOS UM CAMPO OBRIGATORIO POR PREENCHER!
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["users"],
   data: function data() {
     return {
       title: "Register",
+      showFailure: false,
+      showSuccess: false,
+      message: "",
       name: "",
       email: "",
       password: "",
       confirmation_password: "",
-      nif: ""
+      nif: "",
+      usersOnRegister: []
     };
   },
   validations: {
@@ -2332,15 +2331,29 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser(user) {
       var _this = this;
 
-      axios.post("api/users", {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        nif: this.nif
-      }).then(function (response) {
-        console.log(response);
+      axios.get("api/users").then(function (response) {
+        _this.usersOnRegister = response.data.data;
+        _this.showFailure = false;
 
-        _this.$store.commit("setUser", response.data);
+        _this.usersOnRegister.forEach(function (element) {
+          if (_this.email == element.email) {
+            _this.message = "EMAIL JA REGISTADO!";
+            _this.showFailure = true;
+          }
+        });
+
+        if (_this.showFailure == false) {
+          axios.post("api/users", {
+            name: _this.name,
+            email: _this.email,
+            password: _this.password,
+            nif: _this.nif
+          }).then(function (response) {
+            console.log(response);
+
+            _this.$store.commit("setUser", response.data);
+          });
+        }
       });
     }
   }
@@ -21155,28 +21168,45 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     !this.$store.state.isLogged
-      ? _c(
-          "div",
-          { attrs: { align: "center" } },
-          [
-            _c("h1", [_vm._v("Welcome To VirtualWallets")]),
+      ? _c("div", { attrs: { align: "center" } }, [
+          _c("h1", [_vm._v("Welcome To VirtualWallets")]),
+          _vm._v(" "),
+          _c("br"),
+          _c("br"),
+          _vm._v(" "),
+          _c("div", [
+            _c("h2", [_vm._v("Total Wallets")]),
             _vm._v(" "),
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            _c("div", [
-              _c("h2", [_vm._v("Total Wallets")]),
-              _vm._v(" "),
-              _c("h1", [_vm._v(_vm._s(this.wallets.length))])
-            ]),
-            _vm._v(" "),
-            _c("br"),
-            _c("br"),
-            _vm._v(" "),
-            _c("login")
-          ],
-          1
-        )
+            _c("h1", [_vm._v(_vm._s(this.wallets.length))])
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _c("br"),
+          _vm._v(" "),
+          !_vm.registerUserState
+            ? _c(
+                "div",
+                [
+                  _c("login", {
+                    on: { "begin-register-user": _vm.beginRegisterUser }
+                  })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.registerUserState
+            ? _c(
+                "div",
+                [
+                  _c("register", {
+                    on: { "cancel-register-user": _vm.cancelRegisterUser }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
       : _vm._e(),
     _vm._v(" "),
     this.$store.state.isLogged
@@ -21367,10 +21397,6 @@ var render = function() {
       [
         _c("h1", [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
-        _c("pre", [
-          _vm._v("            " + _vm._s(_vm.$v.password) + "\n        ")
-        ]),
-        _vm._v(" "),
         _c("label", [_vm._v("User name")]),
         _vm._v(" "),
         _c("input", {
@@ -21410,6 +21436,26 @@ var render = function() {
         !_vm.$v.name.required ? _c("p", [_vm._v("Name required")]) : _vm._e(),
         _vm._v(" "),
         _c("label", [_vm._v("Email")]),
+        _vm._v(" "),
+        _vm.showFailure
+          ? _c("div", { staticClass: "alert alert-failure" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "close-btn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.showFailure = false
+                    }
+                  }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("strong", [_vm._v(_vm._s(_vm.message))])
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("input", {
           directives: [

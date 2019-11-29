@@ -2,9 +2,6 @@
     <div class="jumbotron" align="left">
         <form class="register" @submit.prevent="register">
             <h1>{{ title }}</h1>
-            <pre>
-                {{ $v.password }}
-            </pre>
             <label>User name</label>
             <input
                 required
@@ -17,6 +14,10 @@
             />
             <p v-if="!$v.name.required">Name required</p>
             <label>Email</label>
+            <div class="alert alert-failure" v-if="showFailure">
+                <button type="button" class="close-btn" v-on:click="showFailure=false">&times;</button>
+                <strong>{{ message }}</strong>
+            </div>
             <input
                 required
                 type="email"
@@ -92,6 +93,7 @@
     </div>
 </template>
 <script>
+//TODO: FAZER O BLOQUEIO DO BOTAO CREATE USER SE HOUVER PELO MENOS UM CAMPO OBRIGATORIO POR PREENCHER!
 import {
     required,
     email,
@@ -101,14 +103,19 @@ import {
 } from "vuelidate/lib/validators";
 
 export default {
+    props: ["users"],
     data: function() {
         return {
             title: "Register",
+            showFailure: false,
+            showSuccess: false,
+            message: "",
             name: "",
             email: "",
             password: "",
             confirmation_password: "",
-            nif:""
+            nif:"",
+            usersOnRegister: []
         };
     },
     validations: {
@@ -135,17 +142,32 @@ export default {
             this.$emit("cancel-register-user");
         },
         createUser: function(user) {
-            axios.post("api/users", {
-                name: this.name,
-                email: this.email,
-                password: this.password,
-                nif: this. nif
-            })
-            .then(response =>{
-                console.log(response)
-                this.$store.commit("setUser", response.data);
-            })
-        }   
+
+            axios.get("api/users").then(response => {
+                this.usersOnRegister = response.data.data;
+                this.showFailure = false;
+
+                this.usersOnRegister.forEach(element => {
+                if(this.email == element.email){
+                    this.message = "EMAIL JA REGISTADO!";
+                    this.showFailure = true;
+
+                }
+                });
+                if(this.showFailure == false){
+                    axios.post("api/users", {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        nif: this. nif
+                    })
+                    .then(response =>{
+                        console.log(response)
+                        this.$store.commit("setUser", response.data);
+                    })
+                }
+            });
+        }
     }
 };
 </script>
