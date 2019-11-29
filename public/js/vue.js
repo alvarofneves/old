@@ -1889,8 +1889,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2446,8 +2444,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['users', 'currentUser'],
   data: function data() {
@@ -2699,7 +2695,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.jumbotron[data-v-172b28a4] {\n    padding-top: 2%;\n    padding-bottom: 2%;\n    padding-left: 5%;\n    padding-right: 5%;\n    width: 50%;\n}\n.form-control[data-v-172b28a4] {\n    width: 100%;\n    align-content: left;\n}\np[data-v-172b28a4]{\n    color: red;\n}\n", ""]);
+exports.push([module.i, "\n.jumbotron[data-v-172b28a4] {\r\n    padding-top: 2%;\r\n    padding-bottom: 2%;\r\n    padding-left: 5%;\r\n    padding-right: 5%;\r\n    width: 50%;\n}\n.form-control[data-v-172b28a4] {\r\n    width: 100%;\r\n    align-content: left;\n}\np[data-v-172b28a4]{\r\n    color: red;\n}\r\n", ""]);
 
 // exports
 
@@ -2718,7 +2714,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.jumbotron[data-v-aacc3324] {\n    padding-top: 2%;\n    padding-bottom: 2%;\n    padding-left: 5%;\n    padding-right: 5%;\n    width: 50%;\n}\n.form-control[data-v-aacc3324] {\n    width: 100%;\n    align-content: left;\n}\np[data-v-aacc3324] {\n    color: red;\n}\n", ""]);
+exports.push([module.i, "\n.jumbotron[data-v-aacc3324] {\r\n    padding-top: 2%;\r\n    padding-bottom: 2%;\r\n    padding-left: 5%;\r\n    padding-right: 5%;\r\n    width: 50%;\n}\n.form-control[data-v-aacc3324] {\r\n    width: 100%;\r\n    align-content: left;\n}\np[data-v-aacc3324] {\r\n    color: red;\n}\r\n", ""]);
 
 // exports
 
@@ -21003,8 +20999,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "jumbotron", attrs: { align: "left" } }, [
-    _c("pre", [_vm._v("        " + _vm._s(_vm.$v) + "\n    ")]),
-    _vm._v(" "),
     _c(
       "form",
       {
@@ -41018,8 +41012,8 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/eliomartins/Desktop/EI/DAD/Project/virtualwallet/resources/js/vue.js */"./resources/js/vue.js");
-module.exports = __webpack_require__(/*! /Users/eliomartins/Desktop/EI/DAD/Project/virtualwallet/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\virtualwallet\resources\js\vue.js */"./resources/js/vue.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\virtualwallet\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

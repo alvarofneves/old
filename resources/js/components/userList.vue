@@ -6,7 +6,6 @@
                 <th>Email</th>
                 <th>Type</th>
                 <th>Active</th>
-                <!-- <th>Photo</th> -->
                 <th>NIF</th>
             </tr>
         </thead>
@@ -16,7 +15,6 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.type }}</td>
                 <td>{{ user.active }}</td>
-                <!-- <td>{{ user.photo }}</td> -->
                 <td>{{ user.nif }}</td>
                 <td>
                     <a class="btn btn-sm btn-primary" v-on:click.prevent="editUser(user)">Edit</a>

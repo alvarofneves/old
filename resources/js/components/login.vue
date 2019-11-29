@@ -1,8 +1,6 @@
 <template>
     <div class="jumbotron" align="left">
-        <pre>
-            {{ $v }}
-        </pre>
+        
         <form class="login" @submit.prevent="login">
             <h1 align="center">{{ title }}</h1>
             
