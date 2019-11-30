@@ -8,6 +8,7 @@
 
 require('./bootstrap');
 
+import Vue from 'vue';
 import store from './store/auth';
 import Vuelidate from 'vuelidate';
 import VueRouter from 'vue-router';
@@ -17,11 +18,16 @@ import Register from './components/register';
 import MainPage from './components/mainPage';
 import Wallets from './components/wallets';
 import Movements from './components/movements';
+import BootstrapVue from 'bootstrap-vue';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 window.Vue = require('vue');
 
 Vue.use(Vuelidate)
 Vue.use(VueRouter)
+Vue.use(BootstrapVue)
 
 const routes = [
     {path:'/', redirect:'/mainPage'},

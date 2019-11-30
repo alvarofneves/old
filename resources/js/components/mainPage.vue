@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="px-2">
         <div v-if="!this.$store.state.isLogged" align="center">
             <h1>Welcome To VirtualWallets</h1>
             <br><br>
@@ -16,8 +16,7 @@
             </div>
         </div>
         <div v-if="this.$store.state.isLogged">
-            <h1>Welcome, {{ this.$store.state.user.name }}</h1>
-            <h2>Total Virtual Wallets {{ wallets.lenght }}</h2>
+            <menuNav />
             <users></users>
         </div>
     </div>
@@ -29,6 +28,7 @@ import UsersComponent from "./users";
 import RegisterComponent from "./register";
 import WalletsComponent from "./wallets";
 import MovementsComponent from "./movements";
+import MenuNavComponent from "./menuNav";
 
 export default {
     props: ["user"],
@@ -104,7 +104,13 @@ export default {
         users: UsersComponent,
         register: RegisterComponent,
         users: UsersComponent,
-        wallets: WalletsComponent
+        wallets: WalletsComponent,
+        menuNav : MenuNavComponent
     }
 };
 </script>
+<style>
+.px-2 {
+  padding-top: 30px;
+}
+</style>
