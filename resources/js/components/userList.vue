@@ -4,8 +4,8 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Type</th>
-                <th>Active</th>
+                <!-- <th>Type</th>
+                <th>Active</th> -->
                 <th>NIF</th>
             </tr>
         </thead>
@@ -13,10 +13,10 @@
             <tr v-for="user in users" :key="user.id" :class="{active: currentUser === user}">
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.type }}</td>
-                <td>{{ user.active }}</td>
+                <!-- <td>{{ user.type }}</td>
+                <td>{{ user.active }}</td> -->
                 <td>{{ user.nif }}</td>
-                <td>
+                <td v-if="$store.state.user.type=='a'">
                     <a class="btn btn-sm btn-primary" v-on:click.prevent="editUser(user)">Edit</a>
                     <a class="btn btn-sm btn-danger" v-on:click.prevent="deleteUser(user)">Delete</a>
                 </td>
